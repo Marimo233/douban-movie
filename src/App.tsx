@@ -1,15 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom'
 
-import {Button} from 'antd'
+import {routers} from './routes'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <Button type='primary'/>
-      </header>
+     <BrowserRouter>
+      <Switch>
+        <Redirect to='/home' from='/' exact />
+        {
+          routers.map((item:any)=>{return <Route path={item.url} component={item.component} key={item.key}/>})
+        }
+        
+      </Switch>
+     </BrowserRouter>
     </div>
   );
 }
