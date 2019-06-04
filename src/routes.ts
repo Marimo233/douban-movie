@@ -8,7 +8,7 @@ interface routes{
 
 export const routers:Array<routes>=[
   {
-    url:'./home',
+    url:'/home',
     key:1,
     component:Home,
   }
