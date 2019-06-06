@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { Input } from 'antd';
 
 import './index.less'
-import Carousel from '../../components/ Carousel'
+import TheaterCarousel from '../../components/ theaterCarousel'
 import {getHotShowing} from '../../request'
 
 const Search = Input.Search;
@@ -67,7 +67,7 @@ useEffect(()=>{
       <div className="content">
         <div className="wrap">
           <div className="left">
-            <Carousel dataList={HotMovieList} />
+            <TheaterCarousel dataList={HotMovieList} />
           </div>
         </div>
       </div>
