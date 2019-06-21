@@ -3,7 +3,7 @@ import { Input } from 'antd';
 
 import './index.less'
 import TheaterCarousel from '../../components/ theaterCarousel'
-import {getHotShowing} from '../../request'
+import {getHotShowing,getHotMovie} from '../../request'
 
 const Search = Input.Search;
 const Home:React.FC=()=> {
@@ -14,6 +14,11 @@ useEffect(()=>{
   getHotShowing({}).then((resp:any)=>{
     const {subjects}=resp.data
     setHotMovieList(subjects)
+  })
+},[])
+useEffect(()=>{
+  getHotMovie({}).then((resp:any)=>{
+    console.log(resp)
   })
 },[])
 
@@ -66,8 +71,8 @@ useEffect(()=>{
       </div>
       <div className="content">
         <div className="wrap">
-          <div className="left">
-            <TheaterCarousel dataList={HotMovieList} />
+          <div className="content-left">
+            <TheaterCarousel dataList={HotMovieList} isthreater={true} />
           </div>
         </div>
       </div>
