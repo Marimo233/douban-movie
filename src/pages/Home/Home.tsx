@@ -72,7 +72,7 @@ useEffect(()=>{
       <div className="content">
         <div className="wrap">
           <div className="content-left">
-            <TheaterCarousel dataList={HotMovieList} isthreater={true} />
+            <TheaterCarousel dataList={HotMovieList}/>
           </div>
         </div>
       </div>

@@ -1,13 +1,11 @@
-import React,{useState,useEffect,Fragment} from 'react'
-import { Rate } from 'antd';
+import React,{useState} from 'react'
 import Slider from "react-slick";
 
 import './index.less'
-import { sign } from 'crypto';
+import MovieCard from '../movieCard'
 
 interface Props{
   dataList:Array<any>,
-  isthreater:boolean
 }
 
 interface  sliderSetting{
@@ -19,7 +17,7 @@ interface  sliderSetting{
   nextArrow: any,
   prevArrow:any,
   beforeChange:any,
-  autoPlay:boolean,
+  autoplay:boolean,
   autoplaySpeed:number,
   cssEase: string
 }
@@ -62,21 +60,20 @@ const slideDots=(props:dotsProps)=>{
 }
 export default function Carousel(props:Props) {
   let [page,setPage]=useState(1)
-  const {dataList,isthreater}=props
+  const {dataList}=props
 //slide配置
 const settings:sliderSetting = {
-  dots: isthreater?false:true,
+  dots: false,
   infinite: true,
-  speed: 500,
+  speed: 1500,
   slidesToShow: 5,
   slidesToScroll: 5,
   prevArrow:<SlidePreArrow />,
   nextArrow: <SlideNextArrow />,
-  autoPlay:true,
-  autoplaySpeed:2000,
+  autoplay:true,
+  autoplaySpeed:6000,
   cssEase: "linear",
   beforeChange:(prevPage:number,nextPage:number):void=>{
-    console.log(nextPage)
     setPage(nextPage/5+1)
   }
 };
@@ -92,22 +89,7 @@ const colNumber:number=Math.ceil(dataList.length/5)>2?Math.ceil(dataList.length/
          {
            dataList.map((item,index)=>{
              return (
-              <div key={item.id} className='post-wrap'>
-                <div className='theaterPost'>
-                  <img src={'https://images.weserv.nl/?url='+item.images.small.replace('https://','')} alt={item.title}/>
-                </div>
-                <h1><a href={item.alt}>{item.title}</a></h1>
-                <div className="rates">{
-                  item.rating.average===0
-                  ? <span style={{fontSize:'12px',color:'#333'}}>暂无评分</span>
-                  :<Fragment>
-                    <Rate disabled value={Math.round(item.rating.average)/2} allowHalf /><span>{item.rating.average.toFixed(1)}</span>
-                  </Fragment>
-
-                }
-                </div>
-                <button><a href={`https://maoyan.com/query?kw=${item.title}`}>选座购票</a></button>
-             </div>
+                <MovieCard Info={item} key={item.id}/>
              )
            })
          }

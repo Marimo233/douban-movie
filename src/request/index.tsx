@@ -29,11 +29,11 @@ function http() {
 
 // 热映
 export function getHotShowing(params?:any) {
-  return http().get("/api/movie/in_theaters",{params:{apikey: API_KEY}});
+  return http().get("/test/movie/in_theaters",{params:{apikey: API_KEY}});
 }
 //最近热门电影
 export function getHotMovie(params?:any) {
-  return axios.get('/api2/search_subjects',{params:{
+  return axios.get('/api/search_subjects',{params:{
     type: 'movie',
     tag: '热门',
     page_limit: 50,
