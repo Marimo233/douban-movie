@@ -1,4 +1,5 @@
-import React ,{Fragment,useState,useEffect}from 'react'
+import React ,{Fragment,useState,useEffect,useRef}from 'react'
+import ReactDom from 'react-dom'
 import {Rate} from 'antd'
 
 import HoverContent from '../hoverContent'
@@ -8,24 +9,41 @@ interface Props{
   Info:any,
   key:string
 }
-
+interface Position{
+  x:number,
+  y:number
+}
 export default function MovieCard(props:Props) {
   const [status,setStatus]=useState(false)
-
+  const [timer,setTimer]=useState(false)
+  const [pos,setPos]=useState<Position>({x:0,y:0})
+  const card=useRef<HTMLDivElement>(null)
   const {Info}=props
+  const root = document.getElementById('root')  as HTMLElement
 
-
-
-  const changeStatus=()=>{
-    // reru
-    // if(status){
-    //   clear
-    // }
-    // timer=setTimeout(()=>{setStatus(true)},800)
+  useEffect(()=>{
+    let timeout:any
+    if(timer){
+       timeout=setTimeout(()=>{
+        getPosition()
+        setStatus(true)},800)
+    }else{
+      setStatus(false)
+    }
+    return ()=>{clearTimeout(timeout)}
+  },[timer])
+  //获取位置
+const getPosition=()=>{
+  if(card.current){
+    const x=card.current.getBoundingClientRect().left+card.current.offsetWidth+5;
+    const y=card.current.getBoundingClientRect().top;
+    setPos({x,y})
   }
+  
+}
   return (
-    <div key={Info.id} className='post-wrap'>
-    <div className='theaterPost' onMouseOver={changeStatus} onMouseLeave={()=>{ setStatus(false)}}>
+    <div key={Info.id} className='post-wrap' ref={card}>
+    <div className='theaterPost' onMouseEnter={()=>{setTimer(true)}} onMouseLeave={()=>{setTimer(false)}}>
       <img src={'https://images.weserv.nl/?url='+Info.images.small.replace('https://','')} alt={Info.title}/>
     </div>
     <h1><a href={Info.alt}>{Info.title}</a></h1>
@@ -40,7 +58,9 @@ export default function MovieCard(props:Props) {
     </div>
     <button><a href={`https://maoyan.com/query?kw=${Info.title}`}>选座购票</a></button>
     {
-      status&&<HoverContent detail={Info}/>
+      status?
+      ReactDom.createPortal(<HoverContent detail={Info} pos={pos}/>,root)
+      :null
     }
     </div>
   )

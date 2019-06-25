@@ -40,3 +40,11 @@ export function getHotMovie(params?:any) {
     page_start: 0
   }});
 }
+//最近热门电影标题
+export function getHotMovieTitle(params?:any) {
+  return axios.get('/api/search_tags',{params:{
+    type: 'movie',
+    tag: '热门',
+    sourceinde:'index'
+  }});
+}

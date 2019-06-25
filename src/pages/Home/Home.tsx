@@ -2,13 +2,15 @@ import React,{useState, useEffect} from 'react'
 import { Input } from 'antd';
 
 import './index.less'
-import TheaterCarousel from '../../components/ theaterCarousel'
+import TheaterCarousel from '../../components/theaterCarousel'
+import ListCarousel from '../../components/listCarousel'
 import {getHotShowing,getHotMovie} from '../../request'
 
 const Search = Input.Search;
 const Home:React.FC=()=> {
   
 let [HotMovieList,setHotMovieList]=useState<Array<any>>([])
+let [MovieList,setMovieList]=useState<Array<any>>([])
 
 useEffect(()=>{
   getHotShowing({}).then((resp:any)=>{
@@ -18,7 +20,8 @@ useEffect(()=>{
 },[])
 useEffect(()=>{
   getHotMovie({}).then((resp:any)=>{
-    console.log(resp)
+    const {subjects}=resp.data
+    setMovieList(subjects)
   })
 },[])
 
@@ -73,6 +76,7 @@ useEffect(()=>{
         <div className="wrap">
           <div className="content-left">
             <TheaterCarousel dataList={HotMovieList}/>
+            <ListCarousel dataList={MovieList}/>
           </div>
         </div>
       </div>
