@@ -1,18 +1,44 @@
 .hover-content{
   position: fixed;
-  width: 230px;
+  width: 203px;
   background-color: white;
-  border:1px solid #ccc;
+  border:1px solid #ddd;
   position: absolute;
   z-index: 999999;
-  padding:30px 20px 30px;
+  padding:20px;
+  font-size: 12px;
+  line-height: 15px;
   h1{
     font-size: 18px;
     font-weight:normal;
+    line-height: 25px;
+    margin-bottom: 15px;
     span{
       margin-left:5px;
       color:#ccc;
       font-size: 12px;
     }
+  }
+  .hover-rates{
+    height: 16px;
+    margin-bottom: 15px;
+    i{
+      font-style: normal;
+    }
+  }
+  .time-local{
+    span{
+      margin-right: 10px;
+    }
+  }
+  .directors{
+    margin:18px 0 10px;
+    span{
+      margin-left: 5px;
+    }
+  }
+  .casts{
+    &:extend(.directors);
+    margin:0;
   }
 }
