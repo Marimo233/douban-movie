@@ -113,7 +113,40 @@ margin-bottom: 40px;
 .content{
   .content-left{
     width: 675px;
-    height: 324px;
     margin-bottom: 36px;
+    .hot-title{
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eaeaea;
+      font-size: 13px;
+      color: #9b9b9b;
+      display: flex;
+      align-items: center;
+      position: relative;
+      b{
+        font-size: 16px;
+        font-weight: normal;
+        margin-right: 14px;
+        color: #111;
+      }
+      a{
+        position: absolute;
+        right: 0;
+        color:#37a;
+        // &:visited{
+        //   color: #666699;
+        // }
+      }
+      ul{
+        margin: 0;
+        li{
+          float: left;
+          margin-right: 12px;
+          
+        }
+        .active-li{
+          color: #111;
+        }
+      }
+    }
   }
 }

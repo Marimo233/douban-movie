@@ -3,14 +3,14 @@ import { Input } from 'antd';
 
 import './index.less'
 import TheaterCarousel from '../../components/theaterCarousel'
-import ListCarousel from '../../components/listCarousel'
-import {getHotShowing,getHotMovie} from '../../request'
+import {getHotShowing,getHotMovie,getHotMovieTitle} from '../../request'
 
 const Search = Input.Search;
 const Home:React.FC=()=> {
   
 let [HotMovieList,setHotMovieList]=useState<Array<any>>([])
 let [MovieList,setMovieList]=useState<Array<any>>([])
+let [MovieTitle,setMovieTitle]=useState<Array<any>>([])
 
 useEffect(()=>{
   getHotShowing({}).then((resp:any)=>{
@@ -22,6 +22,12 @@ useEffect(()=>{
   getHotMovie({}).then((resp:any)=>{
     const {subjects}=resp.data
     setMovieList(subjects)
+  })
+},[])
+useEffect(()=>{
+  getHotMovieTitle({}).then((resp:any)=>{
+    const {tags}=resp.data
+    setMovieTitle(tags)
   })
 },[])
 
@@ -76,7 +82,18 @@ useEffect(()=>{
         <div className="wrap">
           <div className="content-left">
             <TheaterCarousel dataList={HotMovieList}/>
-            <ListCarousel dataList={MovieList}/>
+            <div className="hot-title">
+              <b>最近热门电影</b>
+              <ul>
+                {
+                  MovieTitle.map((item,index)=>{
+                    return <li key={item} className={index===0?'active-li':''}>{item}</li>
+                  })
+                }
+              </ul>
+              <a href="#">更多»</a>
+            </div>
+            
           </div>
         </div>
       </div>
