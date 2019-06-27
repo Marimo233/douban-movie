@@ -1,13 +1,15 @@
 import React ,{Fragment,useState,useEffect,useRef}from 'react'
 import ReactDom from 'react-dom'
-import {Rate, Divider} from 'antd'
+import {Rate} from 'antd'
 
 import HoverContent from '../hoverContent'
 import './index.less'
 
 interface Props{
   Info:any,
-  key:string,
+  key:string|number,
+  isHotList:boolean,
+  index?:number
 }
 interface Position{
   x:number,
@@ -18,7 +20,7 @@ export default function MovieCard(props:Props) {
   const [timer,setTimer]=useState(false)
   const [pos,setPos]=useState<Position>({x:0,y:0})
   const card=useRef<HTMLDivElement>(null)
-  const {Info}=props
+  const {Info,isHotList,key,index=0}=props
   const root = document.getElementById('root')  as HTMLElement
 
   useEffect(()=>{
@@ -41,8 +43,10 @@ const getPosition=()=>{
   }
   
 }
+console.log(index)
   return (
-    <div key={Info.id} className='post-wrap' ref={card}>
+    isHotList?
+    <div key={Info.id} className='post-wrap' ref={card} style={{marginRight:(index+1)%5!==0?'25px':''}}>
       <div className='theaterPost' onMouseEnter={()=>{setTimer(true)}} onMouseLeave={()=>{setTimer(false)}}>
         <img src={'https://images.weserv.nl/?url='+Info.images.small.replace('https://','')} alt={Info.title}/>
       </div>
@@ -62,6 +66,16 @@ const getPosition=()=>{
         ReactDom.createPortal(<HoverContent detail={Info} pos={pos}/>,root)
         :null
       }
+    </div>
+    :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}}>
+      <div className="listPost">
+        <img src={Info.cover} alt={Info.title}/>
+      </div>
+      <p className="listTitle">
+        {Info.is_new?<i/>:''}
+        {Info.title}
+        <strong>{Info.rate}</strong>
+      </p>
     </div>
   )
 }

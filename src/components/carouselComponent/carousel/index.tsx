@@ -15,36 +15,38 @@ interface  sliderSetting{
   beforeChange:any,
   autoplay:boolean,
   autoplaySpeed:number,
-  cssEase: string
+  cssEase: string,
 }
 
 interface Props{
   changePage?:any,
-  children:any
+  children:any,
+  isHotList:boolean
 }
 export default function Carousel(props:Props) {
-const {changePage}=props
+const {changePage,isHotList,children}=props
 const settings:sliderSetting = {
-  dots: false,
+  dots: !isHotList,
   infinite: true,
   speed: 1500,
-  slidesToShow: 5,
-  slidesToScroll: 5,
-  prevArrow:<SlidePreArrow />,
-  nextArrow: <SlideNextArrow />,
-  autoplay:true,
+  slidesToShow:1,
+  slidesToScroll:1,
+  prevArrow:<SlidePreArrow isHotList={isHotList}/>,
+  nextArrow: <SlideNextArrow isHotList={isHotList} />,
+  autoplay:false,
   autoplaySpeed:6000,
   cssEase: "linear",
   beforeChange:(prevPage:number,nextPage:number):void=>{
-    nextPage/5+1===0?changePage(1):changePage(nextPage/5+1)
-  }
+    if(changePage){
+      nextPage/5+1===0?changePage(1):changePage(nextPage/5+1)
+    }
+    }
 };
-  return (
+  return(
     <div>
       <Slider {...settings}>
-          {props.children}
-    </Slider>
+        {children}
+      </Slider>
     </div>
-    
   )
 }

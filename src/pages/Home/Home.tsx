@@ -81,19 +81,8 @@ useEffect(()=>{
       <div className="content">
         <div className="wrap">
           <div className="content-left">
-            <TheaterCarousel dataList={HotMovieList}/>
-            <div className="hot-title">
-              <b>最近热门电影</b>
-              <ul>
-                {
-                  MovieTitle.map((item,index)=>{
-                    return <li key={item} className={index===0?'active-li':''}>{item}</li>
-                  })
-                }
-              </ul>
-              <a href="#">更多»</a>
-            </div>
-            
+            <TheaterCarousel dataList={HotMovieList} ishotList={true}/>
+            <TheaterCarousel dataList={MovieList} ishotList={false} isMovie={true} title={MovieTitle}/>
           </div>
         </div>
       </div>

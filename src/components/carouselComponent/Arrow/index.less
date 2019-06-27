@@ -5,7 +5,7 @@
       border-radius: 50%;
       margin-right: 5px;
     }
-.prevArrow-wrap{
+.prevArrow-wrap-list{
   position: absolute;
   top:-44px;
   right: 28px;
@@ -13,10 +13,28 @@
     background: url('../../../assets/slide_swithc_2.png') no-repeat;
   }
 }
-.nextArrow-wrap{
+.prevArrow-wrap{
+  position: absolute;
+  bottom: -30px;
+  left:273px;
+  z-index: 999;
+  .prev-btn{
+    background: url('../../../assets/slide_swithc_2.png') no-repeat;
+  }
+}
+.nextArrow-wrap-list{
   position: absolute;
   top:-44px;
   right: 0;
+  .next-btn{
+    background: url('../../../assets/slide_swithc_2.png') no-repeat -18px 0;
+  }
+}
+.nextArrow-wrap{
+  position: absolute;
+  bottom: -30px;
+  right:273px;
+  z-index: 999;
   .next-btn{
     background: url('../../../assets/slide_swithc_2.png') no-repeat -18px 0;
   }
