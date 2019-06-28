@@ -43,7 +43,6 @@ const getPosition=()=>{
   }
   
 }
-console.log(index)
   return (
     isHotList?
     <div key={Info.id} className='post-wrap' ref={card} style={{marginRight:(index+1)%5!==0?'25px':''}}>

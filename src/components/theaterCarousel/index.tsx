@@ -31,56 +31,42 @@ export default function TheaterCarousel(props:Props) {
 const colNumber:number=Math.ceil(dataList.length/5)>2?Math.ceil(dataList.length/5):1
 
   return (
-    ishotList?
        <div className="theaterContainer">
-         <div className="theaterContainer-head">
-           <b>正在热映</b><a>全部正在热映»</a><a>即将上映»</a>
-            <i>{page}<span>/</span>{colNumber}</i>
-         </div>
-         <Carousel changePage={changePage} isHotList={ishotList}>
-         {
-               list&&list.map((item:any,index:number)=>{
-                 return(
-                   <div className='theaterContainer-wrap' key={index}>
-                      {
-                        item.map((k:any,kindx:number)=>{
-                         return <MovieCard Info={k} isHotList={ishotList} key={k.id} index={kindx}/>
-                        })
-                      }
-                   </div>
-                 )
-               })
-             }
-            </Carousel>
-       </div>
-    :    <div className="listContainer">
-    <div className="hot-title">
-         {isMovie?<b>最近热门电影</b>:<b>最近热门电视剧</b>}
-         <ul>
+         <div className="carousel-title">
            {
-             title.map((item:any,index:number)=>{
-               return <li key={item} className={index===0?'active-li':''}>{item}</li>
-             })
+            ishotList
+            ?<div className="theaterContainer-head">
+                <b>正在热映</b><a>全部正在热映»</a><a>即将上映»</a>
+                <i>{page}<span>/</span>{colNumber}</i>
+            </div>
+            :<div className="hot-title">
+              {isMovie?<b>最近热门电影</b>:<b>最近热门电视剧</b>}
+              <ul>
+                {
+                  title.map((item:any,index:number)=>{
+                    return <li key={item} className={index===0?'active-li':''}>{item}</li>
+                  })
+                }
+              </ul>
+              <a href="#">更多»</a>
+          </div>
            }
-         </ul>
-         <a href="#">更多»</a>
-     </div>
-     <Carousel isHotList={false}>
-        {
-          list&&list.map((item:any,index:number)=>{
-            return(
-              <div className='listContainer-wrap' key={index}>
-                 {
-                   item.map((k:any,kindx:number)=>{
-                    return <MovieCard Info={k} isHotList={false} key={k.id} index={kindx}/>
-                   })
-                 }
-              </div>
-            )
-          })
-        }
-   </Carousel>
-  </div>
-
+         </div>
+        <Carousel changePage={changePage} isHotList={ishotList}>
+          {
+            list&&list.map((item:any,index:number)=>{
+              return(
+                <div className='theaterContainer-wrap' key={index}>
+                  {
+                    item.map((k:any,kindx:number)=>{
+                      return <MovieCard Info={k} isHotList={ishotList} key={k.id} index={kindx}/>
+                    })
+                  }
+                </div>
+              )
+            })
+          }
+        </Carousel>
+      </div>
   )
 }
