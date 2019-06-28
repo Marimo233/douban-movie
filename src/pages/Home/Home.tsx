@@ -3,7 +3,8 @@ import { Input } from 'antd';
 
 import './index.less'
 import TheaterCarousel from '../../components/theaterCarousel'
-import {getHotShowing,getHotMovie,getHotMovieTitle} from '../../request'
+import Recommand from '../../components/recommand'
+import {getHotShowing,getHot,getHotTitle,getGallary} from '../../request'
 
 const Search = Input.Search;
 const Home:React.FC=()=> {
@@ -11,6 +12,9 @@ const Home:React.FC=()=> {
 let [HotMovieList,setHotMovieList]=useState<Array<any>>([])
 let [MovieList,setMovieList]=useState<Array<any>>([])
 let [MovieTitle,setMovieTitle]=useState<Array<any>>([])
+let [TvList,setTvList]=useState<Array<any>>([])
+let [TvTitle,setTvTitle]=useState<Array<any>>([])
+let [GallaryList,setGallary]=useState<Array<any>>([])
 
 useEffect(()=>{
   getHotShowing({}).then((resp:any)=>{
@@ -18,19 +22,59 @@ useEffect(()=>{
     setHotMovieList(subjects)
   })
 },[])
+//热门电影
 useEffect(()=>{
-  getHotMovie({}).then((resp:any)=>{
+  getHot({params:{
+    type: 'movie',
+    tag: '热门',
+    page_limit: 50,
+    page_start: 0
+  }}).then((resp:any)=>{
     const {subjects}=resp.data
     setMovieList(subjects)
   })
 },[])
+//热门电视
 useEffect(()=>{
-  getHotMovieTitle({}).then((resp:any)=>{
+  getHot({params:{
+    type: 'tv',
+    tag: '热门',
+    page_limit: 50,
+    page_start: 0
+  }}).then((resp:any)=>{
+    const {subjects}=resp.data
+    setTvList(subjects)
+  })
+},[])
+//热门电影标题
+useEffect(()=>{
+  getHotTitle({params:{
+    type: 'movie',
+    tag: '热门',
+    source:'index'
+  }}).then((resp:any)=>{
     const {tags}=resp.data
     setMovieTitle(tags)
   })
 },[])
-
+//热门电视标题
+useEffect(()=>{
+  getHotTitle({params:{
+    type: 'tv',
+    tag: '热门',
+    source:'index'
+  }}).then((resp:any)=>{
+    const {tags}=resp.data
+    setTvTitle(tags)
+  })
+},[])
+//推荐
+useEffect(()=>{
+  getGallary().then((resp:any)=>{
+    const {data}=resp.data
+    setGallary(data)
+  })
+},[])
 
   return (
     <div>
@@ -81,8 +125,26 @@ useEffect(()=>{
       <div className="content">
         <div className="wrap">
           <div className="content-left">
-            <TheaterCarousel dataList={HotMovieList} ishotList={true}/>
+            <TheaterCarousel dataList={HotMovieList} ishotList={true} isgallary={false}/>
             <TheaterCarousel dataList={MovieList} ishotList={false} isMovie={true} title={MovieTitle}/>
+            <TheaterCarousel dataList={TvList} ishotList={false} isMovie={false} title={TvTitle}/>
+            <TheaterCarousel dataList={GallaryList} ishotList={true} isgallary={true}/>
+            <Recommand />
+          </div>
+          <div className="content-right">
+            <div className="answer">
+              <a href="#">豆瓣电影评分八问</a>
+            </div>
+            <div className="movie-activity">
+                <div className="activity-title">
+                  电影活动 &nbsp; · &nbsp;·&nbsp; ·&nbsp; ·&nbsp; · &nbsp;· 
+                </div>
+                <ul></ul>
+            </div>
+            <div className="billboard">
+              <title>一周口碑榜 <a href="#">更多榜单»</a></title>
+              <ul></ul>
+            </div>
           </div>
         </div>
       </div>

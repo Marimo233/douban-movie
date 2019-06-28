@@ -31,20 +31,19 @@ function http() {
 export function getHotShowing(params?:any) {
   return http().get("/test/movie/in_theaters",{params:{apikey: API_KEY}});
 }
-//最近热门电影
-export function getHotMovie(params?:any) {
-  return axios.get('/api/search_subjects',{params:{
-    type: 'movie',
-    tag: '热门',
-    page_limit: 50,
-    page_start: 0
-  }});
+//最近热门标题
+export function getHotTitle(params?:any) {
+  return axios.get('/api/search_tags',params);
 }
-//最近热门电影标题
-export function getHotMovieTitle(params?:any) {
-  return axios.get('/api/search_tags',{params:{
-    type: 'movie',
-    tag: '热门',
-    source:'index'
-  }});
+//最近热门
+export function getHot(params?:any) {
+  return axios.get('/api/search_subjects',params);
+}
+//推荐
+export function getGallary(){
+  return axios.get('/rap2/mock/223156/doubanMovie/gallery');
+}
+//评论
+export function getRecomand(){
+  return axios.get('/rap2/mock/223156/doubanmovie/recommand');
 }

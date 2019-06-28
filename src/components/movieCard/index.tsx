@@ -9,7 +9,8 @@ interface Props{
   Info:any,
   key:string|number,
   isHotList:boolean,
-  index?:number
+  index?:number,
+  isgallary?:boolean
 }
 interface Position{
   x:number,
@@ -20,7 +21,7 @@ export default function MovieCard(props:Props) {
   const [timer,setTimer]=useState(false)
   const [pos,setPos]=useState<Position>({x:0,y:0})
   const card=useRef<HTMLDivElement>(null)
-  const {Info,isHotList,key,index=0}=props
+  const {Info,isHotList,key,index=0,isgallary}=props
   const root = document.getElementById('root')  as HTMLElement
 
   useEffect(()=>{
@@ -44,7 +45,19 @@ const getPosition=()=>{
   
 }
   return (
-    isHotList?
+    //评论
+    isgallary?
+      <div key={Info.id} className='gallary-wrap'>
+        <div className="gallary-img">
+          <img src={Info.banner} alt=""/>
+        </div>
+        <div className='gallary-content'>
+          <p className='gallary-title'>{Info.title}</p>
+          <p className="gallary-detail">{Info.content}</p>
+        </div>
+      </div>
+      //正在上映
+    :isHotList?
     <div key={Info.id} className='post-wrap' ref={card} style={{marginRight:(index+1)%5!==0?'25px':''}}>
       <div className='theaterPost' onMouseEnter={()=>{setTimer(true)}} onMouseLeave={()=>{setTimer(false)}}>
         <img src={'https://images.weserv.nl/?url='+Info.images.small.replace('https://','')} alt={Info.title}/>
@@ -66,6 +79,7 @@ const getPosition=()=>{
         :null
       }
     </div>
+    //热门
     :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}}>
       <div className="listPost">
         <img src={Info.cover} alt={Info.title}/>
