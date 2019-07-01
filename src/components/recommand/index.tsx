@@ -2,12 +2,13 @@ import React,{useState,useEffect} from 'react'
 import {Rate} from 'antd'
 
 import './index.less'
-import {getRecomand} from '../../request'
-
+import {API,API_KEY}  from '../../request/api.js'
+import {Get} from '../../request'
 export default function Recommand() {
   let [list,setList]=useState<Array<any>>([])
   useEffect(()=>{
-    getRecomand().then((resp)=>{
+    const url=API.Recommand
+    Get(url,{params:{apikey:API_KEY}}).then((resp:any)=>{
       const {data}=resp.data
       setList(data)
     })

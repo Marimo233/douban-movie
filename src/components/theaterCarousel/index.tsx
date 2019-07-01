@@ -3,8 +3,9 @@ import React,{useState,useEffect,Fragment} from 'react'
 import './index.less'
 import MovieCard from '../movieCard'
 import Carousel from '../carouselComponent/carousel'
+import {API,API_KEY}  from '../../request/api.js'
+import {Get} from '../../request'
 interface Props{
-  dataList:Array<any>,
   ishotList:boolean,
   isMovie?:boolean,
   title?:any,
@@ -13,17 +14,50 @@ interface Props{
 
 
 export default function TheaterCarousel(props:Props) {
-  const {dataList,ishotList,isMovie,title,isgallary}=props
+  const {ishotList,isMovie,isgallary}=props
   let [page,setPage]=useState(1)
-  let [list,setList]=useState(dataList)
+  let [list,setList]=useState<Array<any>>([])
+  let [title,setTitle]=useState([])
   const colums=ishotList?(isgallary?1:5):10
+  //请求轮播图
   useEffect(()=>{
-    let temp=[];
-    for(let i=0;i<dataList.length;i+=colums){
-      temp.push(dataList.slice(i,i+colums))
+    const url=ishotList?
+              isgallary?API.Gallary:API.HotShowing
+              :API.Hot
+    const param=ishotList?isgallary?{}:{params:{apikey: API_KEY}}
+                :{
+                  params:{
+                    type: isMovie?'movie':'tv',
+                    tag: '热门',
+                    page_limit: 50,
+                    page_start: 0
+                  }
+                }
+    Get(url,param).then((resp:any)=>{
+      const {subjects=Array(20)}=resp.data
+      let temp=[];
+    for(let i=0;i<subjects.length;i+=colums){
+      temp.push(subjects.slice(i,i+colums))
     }
     setList(temp)
-  },[dataList])
+    })
+  },[])
+//请求标题
+  useEffect(()=>{
+    const url=API.HotTitle
+    const param={
+      params:{
+        type: isMovie?'movie':'tv',
+        tag: '热门',
+        source:'index'
+      }
+    }
+  Get(url,param).then((resp:any)=>{
+    const {tags}=resp.data
+    setTitle(tags)
+  })
+  },[])
+  // 页数指示器切换
   const changePage=(page:number):void=>{
     setPage(page)
   }

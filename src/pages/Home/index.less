@@ -112,6 +112,7 @@ margin-bottom: 40px;
 }
 .content{
   margin-bottom: 76px;
+  overflow: hidden;
   .content-left{
     width: 675px;
     float: left;
@@ -146,6 +147,188 @@ margin-bottom: 40px;
         }
         .active-li{
           color: #111;
+        }
+      }
+    }
+  }
+  .content-right{
+    float: right;
+    .answer{
+      width: 300px;
+      height: 43px;
+      padding: 12px 0 12px 18px;
+      background: #f2f7f6;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-size:13px;
+      a{
+        &:link{
+          color: #37a;
+        }
+        &:visited{
+          color:#669;
+        }
+      }
+    }
+    .movie-activity{
+      width: 300px;
+      height: 110px;
+      padding: 16px 0 16px 18px;
+      margin-bottom: 20px;
+      background-color: #f2f7f6;
+      .activity-title{
+        font-size: 16px;
+        color: #072;
+      }
+      ul{
+        li{
+          margin-top: 8px;
+          a{
+            &:link{color:#37a;}
+            &:visited{color: #669;}
+          }
+        }
+      }
+    }
+    .billboard{
+      width: 300px;
+      margin-bottom: 20px;
+      h2{
+       font-size: 16px;
+       font-weight: normal;
+       padding-bottom: 10px;
+       border-bottom: 1px solid rgb(234, 234, 234);
+       margin-bottom: 5px;
+       a{
+         font-size: 13px;
+         color: #37a;
+         margin-left: 12px;
+       } 
+      }
+      ul{
+        li{
+          padding: 7px 0;
+          font-size: 13px;
+          color: #111;
+          border-bottom: 1px solid #eaeaea;
+          span{
+            display: inline-block;
+            width: 35px;
+            text-align: center;
+          }
+          a{
+            color: #37a;
+          }
+        }
+      }
+    }
+    #doulist{
+      margin-bottom: 20px;
+      h2{
+        font-size: 16px;
+        color: #111;
+        margin-bottom: 10px;
+      }
+      ul{
+        border-top:1px solid #eee;
+        li{
+          padding: 15px 0;
+          border-bottom: 1px solid #eee;
+          overflow: hidden;
+          font-size: 13px;
+          span{
+            float: right;
+            color: #999;
+          }
+          .title{
+            width: 247px;
+            a{
+              color:#37a;
+            }
+          }
+        }
+      }
+    }
+    .contact-and-cooperation{
+      margin-bottom: 20px;
+      h2{
+        font-size: 16px;
+        color: #111;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom:1px solid #eee;
+      }
+      ul{
+        
+        li{
+          line-height: 24px;
+          font-size: 13px;
+          img{
+            height: 14px;
+            width: auto;
+            vertical-align: middle;
+          }
+          .new{
+            height: 9px;
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+    .contact-mod{
+      h2{
+        font-size: 16px;
+        color: #111;
+        margin-bottom: 10px;
+      }
+      .embassy-list{
+        position: relative;
+        li{
+          width: 60px;
+          float: left;
+          text-align: center;
+          a:first-child{
+            width: 40px;
+            height: 40px;
+            display: block;
+            background-size: 100%;
+            margin: 0 auto 5px;
+          }
+          .primary-link{
+            font-size: 13px;
+            color:#37a;
+          }
+          .icon-embassy-weibo{
+            background: url('../../assets/home_weibo.png') no-repeat center;
+          }
+          .icon-embassy-weixin{
+            position: relative;
+            background: url('../../assets/home_weixin.png') no-repeat center;
+            &:hover{
+              .hover{
+                display: block;
+              }
+            }
+            .hover{
+              position: absolute;
+              left: -10px;
+              top:64px;
+              display:none;
+              img{
+                width: 130px;
+                height: 130px;
+              }
+            }
+          }
+          .icon-embassy-bite-me{
+            background: url('../../assets/bite_me@2x.jpg') no-repeat center;
+          }
+          .icon-embassy-film-pro{
+            background: url('../../assets/home_film_pro@2x.jpg') no-repeat center;
+          }
+          .icon-embassy-club-site{
+            background: url('../../assets/home_club@2x.jpg') no-repeat center;
+          }
         }
       }
     }

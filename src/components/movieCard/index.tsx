@@ -1,8 +1,11 @@
 import React ,{Fragment,useState,useEffect,useRef}from 'react'
 import ReactDom from 'react-dom'
-import {Rate} from 'antd'
+import {Rate, Card} from 'antd'
 
 import HoverContent from '../hoverContent'
+
+import {API}  from '../../request/api.js'
+import {Get} from '../../request'
 import './index.less'
 
 interface Props{
@@ -17,13 +20,37 @@ interface Position{
   y:number
 }
 export default function MovieCard(props:Props) {
+
+  const card=useRef<HTMLDivElement>(null)
+  const {Info,isHotList,index=0,isgallary}=props
+  const root = document.getElementById('root')  as HTMLElement
   const [status,setStatus]=useState(false)
   const [timer,setTimer]=useState(false)
   const [pos,setPos]=useState<Position>({x:0,y:0})
-  const card=useRef<HTMLDivElement>(null)
-  const {Info,isHotList,key,index=0,isgallary}=props
-  const root = document.getElementById('root')  as HTMLElement
-
+  const [CardInfo,setCardInfo]=useState<Array<any>>([])
+    //获取位置
+const getPosition=()=>{
+  if(card.current){
+    const x=card.current.getBoundingClientRect().left+card.current.offsetWidth+5;
+    const y=card.current.getBoundingClientRect().top;
+    setPos({x,y})
+  }
+  
+}
+//请求Card数据
+const requestCard=(id:string)=>{
+  getPosition()
+  if(CardInfo.length){
+    return
+  }else{
+    Get(API.Card,{params:{subject_id:id}}).then((resp:any)=>{
+      const {subject}=resp.data
+      CardInfo.push(subject)
+      setCardInfo(CardInfo)
+    })
+  }
+  
+}
   useEffect(()=>{
     let timeout:any
     if(timer){
@@ -35,16 +62,8 @@ export default function MovieCard(props:Props) {
     }
     return ()=>{clearTimeout(timeout)}
   },[timer])
-  //获取位置
-const getPosition=()=>{
-  if(card.current){
-    const x=card.current.getBoundingClientRect().left+card.current.offsetWidth+5;
-    const y=card.current.getBoundingClientRect().top;
-    setPos({x,y})
-  }
-  
-}
   return (
+    <Fragment>{
     //评论
     isgallary?
       <div key={Info.id} className='gallary-wrap'>
@@ -75,13 +94,13 @@ const getPosition=()=>{
       <button><a href={`https://maoyan.com/query?kw=${Info.title}`}>选座购票</a></button>
       {
         status?
-        ReactDom.createPortal(<HoverContent detail={Info} pos={pos}/>,root)
+        ReactDom.createPortal(<HoverContent detail={Info} pos={pos} isHotList={isHotList}/>,root)
         :null
       }
     </div>
     //热门
-    :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}}>
-      <div className="listPost">
+    :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card}>
+      <div className="listPost" onMouseEnter={()=>{requestCard(Info.id)}}>
         <img src={Info.cover} alt={Info.title}/>
       </div>
       <p className="listTitle">
@@ -89,6 +108,14 @@ const getPosition=()=>{
         {Info.title}
         <strong>{Info.rate}</strong>
       </p>
+      {
+        CardInfo.length?
+        ReactDom.createPortal(<HoverContent detail={CardInfo[0]} pos={pos} isHotList={isHotList}/>,root)
+        :null
+      }
     </div>
+  }
+  </Fragment>
+ 
   )
 }
