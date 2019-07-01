@@ -35,9 +35,10 @@ export default function index(props:Props) {
       </div>
       </div>
       :<div className='Hot-card'>
-        <div>'aaa</div>
         <h1>{detail.title}</h1>
-        {/* <Rate disabled value={Math.round(detail.rate)/2} allowHalf /><span>{detail.rate.toFixed(1)}</span> */}
+        <div className="rates">
+        <Rate disabled value={Math.round(detail.rate)/2} allowHalf /><span>{Number(detail.rate).toFixed(1)}</span>
+        </div>
         <div className="casts">
           {detail.playable?<span className='special'>可播放</span>:''}
           <span>{detail.duration}</span>

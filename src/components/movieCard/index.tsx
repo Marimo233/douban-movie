@@ -41,12 +41,14 @@ const getPosition=()=>{
 const requestCard=(id:string)=>{
   getPosition()
   if(CardInfo.length){
+    setStatus(true)
     return
   }else{
     Get(API.Card,{params:{subject_id:id}}).then((resp:any)=>{
       const {subject}=resp.data
       CardInfo.push(subject)
       setCardInfo(CardInfo)
+      setStatus(true)
     })
   }
   
@@ -86,7 +88,7 @@ const requestCard=(id:string)=>{
         Info.rating.average===0
         ? <span style={{fontSize:'12px',color:'#333'}}>暂无评分</span>
         :<Fragment>
-          <Rate disabled value={Math.round(Info.rating.average)/2} allowHalf />
+          <Rate disabled value={Math.round(Info.rating.average)/2} allowHalf/>
           <span>{Info.rating.average.toFixed(1)}</span>
         </Fragment>
       }
@@ -100,7 +102,7 @@ const requestCard=(id:string)=>{
     </div>
     //热门
     :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card}>
-      <div className="listPost" onMouseEnter={()=>{requestCard(Info.id)}}>
+      <div className="listPost" onMouseEnter={()=>{requestCard(Info.id)}} onMouseLeave={()=>{setStatus(false)}}>
         <img src={Info.cover} alt={Info.title}/>
       </div>
       <p className="listTitle">
@@ -109,10 +111,10 @@ const requestCard=(id:string)=>{
         <strong>{Info.rate}</strong>
       </p>
       {
-        CardInfo.length?
-        ReactDom.createPortal(<HoverContent detail={CardInfo[0]} pos={pos} isHotList={isHotList}/>,root)
-        :null
-      }
+        status?
+          ReactDom.createPortal(<HoverContent detail={CardInfo[0]} pos={pos} isHotList={isHotList}/>,root)
+          :null
+        }
     </div>
   }
   </Fragment>

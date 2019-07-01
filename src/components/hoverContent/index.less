@@ -8,7 +8,7 @@
   padding:20px;
   font-size: 12px;
   line-height: 15px;
-  .HotList-card{
+  .HotList-Card{
     h1{
       font-size: 18px;
       font-weight:normal;
@@ -27,6 +27,38 @@
       text-align: left;
       align-items: center;
       font-size: 12px;
+      .ant-rate {
+        width: 55px;
+        height: 19px;
+        display: flex;
+        align-items: center;
+        .ant-rate-star-full{
+          svg{
+            color: #e09015
+          }
+        }
+        li{
+          margin:0;
+          height: 19px;
+          .ant-rate-star-second{
+            height: 19px;
+            display: flex;
+            align-items: center;
+          }
+          svg{
+          width: 11px;
+          height: 19px;
+          }
+          .ant-rate-star-first{
+            height: 19px;
+            display: flex;
+            align-items: center;
+            svg{
+              color: #e09015;
+            }
+          }
+        }
+      }
       span{
         margin:0 5px;
       }
