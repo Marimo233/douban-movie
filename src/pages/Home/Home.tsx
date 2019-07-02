@@ -8,9 +8,9 @@ import Recommand from '../../components/recommand'
 import {API,API_KEY}  from '../../request/api'
 import {Get} from '../../request'
 
-const Home:React.FC=()=> {
+const Home:React.FC=(props:any)=> {
 let [BillbordList,setBillbord]=useState<Array<any>>([])
-
+console.log(props)
 //口碑
 useEffect(()=>{
   const url=API.Billbord

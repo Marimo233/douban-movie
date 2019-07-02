@@ -35,7 +35,6 @@ const settings:sliderSetting = {
   autoplaySpeed:6000,
   infinite: true,
   beforeChange:(prevPage:number,nextPage:number):void=>{
-    console.log(prevPage,nextPage)
     if(changePage){
       changePage(nextPage+1)
     }

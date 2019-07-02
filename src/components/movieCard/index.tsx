@@ -1,8 +1,9 @@
 import React ,{Fragment,useState,useEffect,useRef}from 'react'
 import ReactDom from 'react-dom'
+import {withRouter} from 'react-router-dom'
 import {Rate} from 'antd'
-import {Redirect} from 'react-router-dom'
 import HoverContent from '../hoverContent'
+
 
 import {API}  from '../../request/api'
 import {Get} from '../../request'
@@ -63,8 +64,7 @@ const requestCard=(id:string)=>{
 }
 //跳转详情页
 const toSubject=(id:string|number)=>{
-  console.log('aa')
- return <Redirect to={`/subject/${id}`} />
+ window.location.href=`/subject/${id}`
 }
   useEffect(()=>{
     let timeout:any
@@ -92,11 +92,11 @@ const toSubject=(id:string|number)=>{
       </div>
       //正在上映
     :isHotList?
-    <div key={Info.id} className='post-wrap' ref={card} style={{marginRight:(index+1)%5!==0?'25px':''}}>
+    <div key={Info.id} className='post-wrap' ref={card} style={{marginRight:(index+1)%5!==0?'25px':''}} onClick={()=>{toSubject(Info.id)}}>
         <div className='theaterPost' onMouseEnter={()=>{setTimer(true)}} onMouseLeave={()=>{setTimer(false)}}>
           <img src={'https://images.weserv.nl/?url='+Info.images.small.replace('https://','')} alt={Info.title}/>
         </div>
-        <h1 onClick={()=>{toSubject(Info.id)}}><a href={Info.alt}>{Info.title}</a></h1>
+        <h1><a href='javascript:void(0)'>{Info.title}</a></h1>
         <div className="rates">{
           Info.rating.average===0
           ? <span style={{fontSize:'12px',color:'#333'}}>暂无评分</span>
@@ -106,12 +106,12 @@ const toSubject=(id:string|number)=>{
           </Fragment>
         }
         </div>
-      <button><a href={`https://maoyan.com/query?kw=${Info.title}`}>选座购票</a></button>
       {
         status?
         ReactDom.createPortal(<HoverContent detail={Info} pos={pos} isHotList={isHotList}/>,root)
         :null
       }
+      <button><a href={`https://maoyan.com/query?kw=${Info.title}`}>选座购票</a></button>
     </div>
     //热门
     :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card}>
