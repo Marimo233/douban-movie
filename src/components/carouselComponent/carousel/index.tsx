@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import Slider from "react-slick";
 
 import './index.less'
@@ -14,7 +14,7 @@ interface  sliderSetting{
   beforeChange:any,
   autoplay:boolean,
   autoplaySpeed:number,
-  initialSlide:number
+  infinite: boolean
 }
 
 interface Props{
@@ -31,9 +31,9 @@ const settings:sliderSetting = {
   slidesToScroll:1,
   prevArrow:<SlidePreArrow isHotList={isHotList}/>,
   nextArrow: <SlideNextArrow isHotList={isHotList} />,
-  autoplay:false,
+  autoplay:true,
   autoplaySpeed:6000,
-  initialSlide:-1,
+  infinite: true,
   beforeChange:(prevPage:number,nextPage:number):void=>{
     console.log(prevPage,nextPage)
     if(changePage){

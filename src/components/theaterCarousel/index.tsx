@@ -3,7 +3,7 @@ import React,{useState,useEffect,Fragment} from 'react'
 import './index.less'
 import MovieCard from '../movieCard'
 import Carousel from '../carouselComponent/carousel'
-import {API,API_KEY}  from '../../request/api.js'
+import {API,API_KEY}  from '../../request/api'
 import {Get} from '../../request'
 interface Props{
   ishotList:boolean,
@@ -91,21 +91,23 @@ const colNumber:number=list.length
           </div>
            }
          </div>
-        <Carousel changePage={changePage} isHotList={ishotList}>
-          {
-            list.map((item:any,index:number)=>{
-              return(
-                <div className='theaterContainer-wrap' key={index}>
-                  {
-                    item.map((k:any,kindx:number)=>{
-                      return <MovieCard Info={k} isHotList={ishotList} key={k.id} index={kindx} isgallary={isgallary}/>
-                    })
-                  }
-                </div>
-              )
-            })
-          }
-        </Carousel>
+          {list.length&& <Carousel changePage={changePage} isHotList={ishotList}>
+           {
+             list.map((item:any,index:number)=>{
+               return(
+                 <div key={index}>
+                   <div className='theaterContainer-wrap' >
+                   {
+                     item.map((k:any,kindx:number)=>{
+                       return <MovieCard Info={k} isHotList={ishotList} key={k.id} index={kindx} isgallary={isgallary}/>
+                     })
+                   }
+                   </div>
+                 </div>
+               )
+             })
+           }
+         </Carousel>}
       </div>
   )
 }

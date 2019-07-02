@@ -1,0 +1,107 @@
+header{
+  width: 1440px;
+  height: 28px;
+  margin:0 auto;
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 400px;
+  background-color: #545652;
+  overflow: hidden;
+  a{
+    color:rgb(213, 213, 213)
+  }
+  .header-left{
+    float: left;
+    li{
+      float: left;
+      text-align: center;
+      padding:0 12px;
+    }
+  }
+  .header-right:extend(.header-left){
+    float: right;
+    margin-right: 12px;
+    li{
+      float: left;
+      text-align: center;
+      padding:0 8px;
+      &:first-child{
+        margin-right: 5px;
+      }
+    }
+  }
+}
+.search{
+  padding: 10px 0 0;
+background-color: #f0f3f5;
+position: relative;
+margin-bottom: 40px;
+  .top{
+    overflow: hidden;
+    border-bottom: 1px solid rgb(227, 235, 236);
+    .logo{
+      float: left;
+      margin-right:13px;
+      background: url('./assets/logo.png') no-repeat  left 12px;
+      a{
+        display: block;
+      width: 145px;
+      height: 56px;
+      }
+    }
+    .input{
+      float: left;
+      padding: 10px 0 15px 0;
+      color: rgb(17,17,17);
+      .ant-input-wrapper.ant-input-group{
+        width: 507px;
+        height: 30px;
+      }
+      .ant-input{
+        padding: 0;
+        padding-left: 10px;
+        font-size: 13px;
+        height: 32px;
+      }
+      .ant-input-group-addon{
+        height: 30px;
+      }
+     .ant-input-search-button{
+       padding: 0;
+       background-color:none;
+       width: 34px;
+       height: 32px;
+       border: none;
+       background: url('./assets/search-btn-bg.png') no-repeat 0 -40px;
+       i{
+         display: none;
+       }
+     }
+    }
+  }
+  .bottom{
+    ul{
+      overflow: hidden;
+      margin:9px 0 9px 0;
+      li{
+        float: left;
+        font-size: 14px;
+        margin-right: 25px;
+        a{
+          color:#27a;
+        }
+      }
+    }
+  }
+  .rank{
+    display: block;
+    width: 186px;
+    height: 96px;
+    position: absolute;
+    top:10px;
+    left:50%;
+    margin-left: 200px;
+    background: url('./assets/rankList.png') no-repeat center ;
+    background-size: 100%;
+  }
+}

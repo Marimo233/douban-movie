@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Rate} from 'antd'
 
 import './index.less'
-import {API,API_KEY}  from '../../request/api.js'
+import {API,API_KEY}  from '../../request/api'
 import {Get} from '../../request'
 export default function Recommand() {
   let [list,setList]=useState<Array<any>>([])
