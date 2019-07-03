@@ -7,7 +7,7 @@ export const API={
   Gallary:'/rap2/mock/223156/doubanMovie/gallery',
   Recommand:'/rap2/mock/223156/doubanmovie/recommand',
   Card:'/api/subject_abstract',
-  ShortCommands:'/test/movie/subject'
+  Subject:'/test/movie/subject'
 }
 
 export const API_KEY = "0b2bdeda43b5688921839c8ecb20399b";

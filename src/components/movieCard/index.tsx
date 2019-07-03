@@ -1,6 +1,6 @@
 import React ,{Fragment,useState,useEffect,useRef}from 'react'
 import ReactDom from 'react-dom'
-import {withRouter} from 'react-router-dom'
+import {withRouter,RouteComponentProps } from 'react-router-dom'
 import {Rate} from 'antd'
 import HoverContent from '../hoverContent'
 
@@ -21,7 +21,7 @@ interface Position{
   y:number
 }
 
-export default function MovieCard(props:Props) {
+const MovieCard:React.FC<Props&RouteComponentProps>=({...props})=> {
 
   const card=useRef<HTMLDivElement>(null)
   const {Info,isHotList,index=0,isgallary}=props
@@ -64,7 +64,7 @@ const requestCard=(id:string)=>{
 }
 //跳转详情页
 const toSubject=(id:string|number)=>{
- window.location.href=`/subject/${id}`
+  props.history.push(`/subject/${id}`)
 }
   useEffect(()=>{
     let timeout:any
@@ -114,7 +114,7 @@ const toSubject=(id:string|number)=>{
       <button><a href={`https://maoyan.com/query?kw=${Info.title}`}>选座购票</a></button>
     </div>
     //热门
-    :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card}>
+    :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card} onClick={()=>{toSubject(Info.id)}}>
       <div className="listPost" onMouseEnter={()=>{requestCard(Info.id)}} onMouseLeave={()=>{return(setStatus(false),setloading(false))}}>
         <img src={Info.cover} alt={Info.title}/>
       </div>
@@ -134,3 +134,4 @@ const toSubject=(id:string|number)=>{
  
   )
 }
+export default withRouter(MovieCard)
