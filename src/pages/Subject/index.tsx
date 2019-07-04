@@ -5,6 +5,7 @@ import {Get} from '../../request/index'
 import Info from './components/Info'
 import Rates from './components/Rates'
 import Judge from './components/Judge'
+import About from './components/About'
 import './index.less'
 export default function Subject(props:any) {
   const [data,setData]=useState<any>({})
@@ -46,6 +47,7 @@ export default function Subject(props:any) {
             <Rates rating={data.rating} ratings_count={data.ratings_count}/>
          </div>
          <Judge/>
+         <About data={data}/>
        </div>
      </div>
     </div>
