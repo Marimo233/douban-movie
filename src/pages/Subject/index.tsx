@@ -6,6 +6,7 @@ import Info from './components/Info'
 import Rates from './components/Rates'
 import Judge from './components/Judge'
 import About from './components/About'
+import Comments from './components/Comments'
 import './index.less'
 export default function Subject(props:any) {
   const [data,setData]=useState<any>({})
@@ -48,6 +49,7 @@ export default function Subject(props:any) {
          </div>
          <Judge/>
          <About data={data}/>
+         <Comments data={data}/>
        </div>
      </div>
     </div>

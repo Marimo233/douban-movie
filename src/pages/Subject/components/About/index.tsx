@@ -7,7 +7,9 @@ interface Props{
 export default function About(props:Props) {
   const {data}=props
   return (
+    data&&
     <Fragment>
+     
       <div className="subject-brief">
            <h1>{data.title}的剧情简介&nbsp;· &nbsp;· &nbsp;·&nbsp;·&nbsp; · &nbsp;·</h1>
            <p>
@@ -39,13 +41,13 @@ export default function About(props:Props) {
                 （
                 <li><a href="#">预告片{data.trailer_urls.length}</a></li><i>|</i>
                 <li><a href="#">添加视频评论</a></li><i>|</i>
-                <li><a href="#">图片{data.trailer.length} <span> &nbsp;·&nbsp; </span>添加</a></li>
+                <li><a href="#">图片{data.trailers.length} <span> &nbsp;·&nbsp; </span>添加</a></li>
               </ul>
           </h1>
           <ul>
             <li><video src={data.trailer_urls}></video><span>预告片</span></li>
             {
-              data.trailer.map((item:any)=>{
+              data.trailers.map((item:any)=>{
                   return <li><img src={item.medium} alt=""/></li>
               })
             }

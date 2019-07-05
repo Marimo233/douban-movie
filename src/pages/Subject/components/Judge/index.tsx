@@ -28,10 +28,10 @@ export default function Judge() {
           {desc[star-1]}
         </span>
      </div>
-      <div className='judge-bottom'>
-          <span><img src="@/assets/short-comment.jpg" /><a href="#">写短评</a></span>
-          <span><img src="@/assets/add-review.jpg" /><a href="#">写影评</a></span>
-          <span><img src="@/assets/add-doulist.jpg" /><a href="#">提问题</a></span>
+      <div className='judge-bottom' >
+          <span ><img src={require("@/assets/short-comment.gif")} /><a href="#">写短评</a></span>
+          <span><img src={require("@/assets/add-review.jpg")} /><a href="#">写影评</a></span>
+          <span><img src={require("@/assets/add-doulist.jpg")} /><a href="#">提问题</a></span>
           <a href="#">分享到</a>
       </div>
   </div> 
