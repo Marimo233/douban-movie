@@ -1,6 +1,64 @@
 .judge-wrap{
   .judge-top{
     padding: 20px 0 3px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    button{
+      width: 48px;
+      height: 24px;
+      margin-right: 10px;
+      background: url('../../../../assets/collect_back2.png')  no-repeat scroll;
+      background-size:100% 100%;
+      border-radius: 4px;
+      text-align: center;
+      border:1px solid #ccc;
+    }
+    .ant-rate {
+      height: 21px;
+      display: flex;
+      align-items: center;
+      .ant-rate-star-full{
+        svg{
+          color: #e09015
+        }
+      }
+      li{
+        margin:0;
+        .ant-rate-star-second{
+          height: 15px;
+          display: flex;
+          align-items: center;
+        }
+        svg{
+        width: 15px;
+        height: 15px;
+        }
+        .ant-rate-star-first{
+          height: 15px;
+          display: flex;
+          align-items: center;
+          svg{
+            color: #e09015;
+          }
+        }
+      }
+    }
+  }
+  .judge-bottom{
+    padding-top:4px;
+    font-size: 12px;
+    display: flex;
+    justify-items: flex-start;
+    span{
+      margin-right:15px;
+      display: flex;
+      align-items: center;
+    }
+    a{
+      color:#37a;
+      margin-left:10px;
+    }
   }
 }
 

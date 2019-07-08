@@ -49,7 +49,8 @@ export default function Subject(props:any) {
          </div>
          <Judge/>
          <About data={data}/>
-         <Comments data={data}/>
+         <Comments data={data} film={false}/>
+         <Comments data={data} film={true}/>
        </div>
      </div>
     </div>

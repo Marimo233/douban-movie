@@ -21,7 +21,7 @@ export default function Judge() {
         <button>想看</button>
         <button>看过</button>
         <span>
-        评价
+        评价:&nbsp;&nbsp;&nbsp;
         </span>
         <Rate value={star}  onHoverChange={(value)=>{debounceHover(value,200)}}/>
         <span>
@@ -29,11 +29,12 @@ export default function Judge() {
         </span>
      </div>
       <div className='judge-bottom' >
-          <span ><img src={require("@/assets/short-comment.gif")} /><a href="#">写短评</a></span>
-          <span><img src={require("@/assets/add-review.jpg")} /><a href="#">写影评</a></span>
-          <span><img src={require("@/assets/add-doulist.jpg")} /><a href="#">提问题</a></span>
+          <span ><img src={require("@/assets/short-comment.gif")} />&nbsp;<a href="#">写短评</a></span>
+          <span><img src={require("@/assets/add-review.jpg")} />&nbsp;<a href="#">写影评</a></span>
+          <span><img src={require("@/assets/add-doulist.jpg")} />&nbsp;<a href="#">提问题</a></span>
           <a href="#">分享到</a>
       </div>
+      
   </div> 
   )
 }
