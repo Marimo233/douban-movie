@@ -23,7 +23,8 @@ export default function Subject(props:any) {
  
   return (
     !loading?
-    <div className='subject-info'>
+    <div className='subject-info' >
+      <a href="/404">go</a>
      <h1>{data.title} <span>({data.year})</span> </h1>
      <div className="article">
        <div className="content">
