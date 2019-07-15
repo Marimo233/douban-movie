@@ -1,9 +1,10 @@
 import Home from './pages/Home/Home'
 import Subject from './pages/Subject/index'
+import Reviews from './pages/Reviews/index'
 interface routes{
   url:string,
   key:number
-  component:any
+  component:any,
 }
 
 export const routers:Array<routes>=[
@@ -13,8 +14,13 @@ export const routers:Array<routes>=[
     component:Home,
   },
   {
-    url:'/subject/:id',
+    url:'/subject/:id/review',
     key:2,
-    component:Subject,
+    component:Reviews,
+  },
+  {
+    url:'/subject/:id',
+    key:3,
+    component:Subject
   }
 ]

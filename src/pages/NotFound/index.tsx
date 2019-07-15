@@ -4,9 +4,11 @@ import React, { Component } from 'react'
 
 export default class NotFound extends Component {
   componentDidMount(){
+    alert('in')
     this.goBack()
   }
   componentWillUnmount(){
+    alert('out')
     window.removeEventListener('popstate',this.goNewPage)
   }
   goBack=()=>{

@@ -1,8 +1,8 @@
 import React,{useEffect,useState, Fragment} from 'react'
-import {Rate,Icon} from 'antd'
 
 import {API,API_KEY}  from '@/request/api'
 import {Get}  from '@/request/index'
+import Comment from '@/components/comments'
 import './index.less'
 interface Props{
   data:any,
@@ -28,7 +28,6 @@ export default function Comments(props:Props) {
     })
   },[])
 
-
   return (
     <div className='comments-wrap'>
       <div className="short-comment">
@@ -37,32 +36,11 @@ export default function Comments(props:Props) {
         热门<span>/</span><a href="#">最新</a><span>/</span><a href="#">好友</a>
       </h2>
       {
-        !Loading&&comments.map((item:any)=>{
-          return <div className="comment" key={item.id}>
-          <div className="top">
-           { film?<img src={item.author.avatar} alt=""/>:''}
-            <a href="#">{item.author.name}</a>
-            看过
-            <Rate value={item.rating.value} />
-            <span>{film?item.created_at:item.created_at.replace(/\s(\d{2}\:){2}\d{2}$/g,'') }</span>
-            {film?'':<em>{item.useful_count}<a href='#'>有用</a></em>}
-          </div>
-          <div className="content">
-            {film?<p className='title'> <a href="#">{item.title}</a></p>:''}
-            {item.content.length>=180?<Fragment>{item.content.slice(1,180)+'...'}<span>(展开)</span></Fragment> :item.content}
-          </div>
-          {
-            film?<div className="support-btn">
-            <button><Icon type="up" />{item.useful_count}</button>
-            <button><Icon type="down" />{item.useless_count}</button>
-            <a href="#">{item.comments_count}回应</a>
-          </div>:''
-          }
-          
-          </div>
+        !Loading&&comments.map((item:any,index:number)=>{
+          return <Comment film={film} item={item} last={index===comments.length-1} key={item.id}/>
         })
       }
-      {!Loading&&<p> <a href='#'>>更多短评{commentsData.total}条</a></p>}
+      {!Loading&&<p className='more-comments'> {film?<a href='#'>更多影评{commentsData.total}篇</a>:<a href='#'>更多短评{commentsData.total}条</a>}</p>}
       </div>
     </div>
   )

@@ -17,14 +17,12 @@ export default function Subject(props:any) {
     Get(url,{params:{apikey:API_KEY}}).then((resp:any)=>{
       setData(resp.data)
       setLoading(false)
-    })
+    }).catch((err:any)=>alert(err))
   },[])
 
- 
   return (
     !loading?
     <div className='subject-info' >
-      <a href="/404">go</a>
      <h1>{data.title} <span>({data.year})</span> </h1>
      <div className="article">
        <div className="content">
