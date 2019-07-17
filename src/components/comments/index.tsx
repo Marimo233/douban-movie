@@ -35,13 +35,13 @@ export default class Comment extends Component <Props,State>{
           </div>
           <div className="content">
             {film?<p className='title'> <a href="#">{item.title}</a></p>:''}
-            <p className="content-detail">{
+            <div className="content-detail" >{
               this.state.fold
               ?<Fragment>{item.content.slice(0,180)+'...'}<span onClick={this.scrollContent}>(展开)</span></Fragment> 
               :item.content.length>180
-                ?<Fragment>{item.content}<span onClick={this.scrollContent}>(收起)</span></Fragment>
+                ?<Fragment>{item.content.split('\n').map((str:string)=><p style={{marginBottom:'20px'}}>{str}</p>)}<span onClick={this.scrollContent}>(收起)</span></Fragment>
                 :item.content}
-            </p>
+            </div>
           </div>
           {
             film?<div className="support-btn">

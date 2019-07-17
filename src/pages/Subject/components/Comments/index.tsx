@@ -1,5 +1,5 @@
 import React,{useEffect,useState, Fragment} from 'react'
-
+import {Link} from 'react-router-dom'
 import {API,API_KEY}  from '@/request/api'
 import {Get}  from '@/request/index'
 import Comment from '@/components/comments'
@@ -40,7 +40,7 @@ export default function Comments(props:Props) {
           return <Comment film={film} item={item} last={index===comments.length-1} key={item.id}/>
         })
       }
-      {!Loading&&<p className='more-comments'> {film?<a href='#'>更多影评{commentsData.total}篇</a>:<a href='#'>更多短评{commentsData.total}条</a>}</p>}
+      {!Loading&&<p className='more-comments'> {film?<Link to={`/subject/${data.id}/review`} >更多影评{commentsData.total}篇</Link>:<a href='#'>更多短评{commentsData.total}条</a>}</p>}
       </div>
     </div>
   )
