@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Icon} from 'antd'
 import {RouteComponentProps ,match} from 'react-router-dom'
 import Comment from '@/components/comments'
 import {API,API_KEY}  from '@/request/api'
@@ -46,8 +47,10 @@ interface Props{
 }
 interface State{
   comments:any,
-  start:number|string,
+  start:number,
   div:React.RefObject<HTMLDivElement>,
+  scrollStart:number,
+  timer:number
 }
 
 export default class Reviews extends Component <Props,State>{
@@ -55,28 +58,49 @@ export default class Reviews extends Component <Props,State>{
     super(props)
     this.state={
       comments:[],
-      start:'1',
-      div:React.createRef()
+      start:0,
+      div:React.createRef(),
+      scrollStart:0,
+      timer:0
     }
   }
-request=()=>{
+//请求
+request=(start:number)=>{
   const {id}=this.props.match.params
     const url=API.Subject+'/'+id+'/reviews'
-    Get(url,{params:{apikey:API_KEY,start:this.state.start,count:25}}).then((resp:any)=>{
-      this.setState({comments:resp.data.reviews,start:resp.data.next_start})
+    Get(url,{params:{apikey:API_KEY,start,count:25}}).then((resp:any)=>{
+      this.setState((prevState,props)=>({comments:this.state.comments.concat(resp.data.reviews),start:resp.data.next_start}))
     
     }).catch((err:string)=>alert(err))
 }
+//翻页
+skippage=()=>{
+  this.setState({comments:[]},()=>this.request(this.state.start))
+}
 //滚动加载
 scrollLoad=()=>{
-  if(this.state.div.current){
-    console.log(this.state.div.current.getBoundingClientRect().top+window.scrollY)
+  if(this.state.timer){
+    return
+  }else{
+    this.setState({
+      timer:window.setTimeout(()=>{
+        if(window.scrollY-this.state.scrollStart>4000){
+          if(this.state.comments.length>=75){
+            return
+          }else{
+            this.request(this.state.start+25)
+          this.setState((prevState,props)=>{return {start:prevState.start+25,scrollStart:window.scrollY}})
+          } 
+        }
+        this.setState({timer:0})
+      },500)
+    })
   }
  
 }
 
 componentDidMount(){
-  this.request()
+  this.request(this.state.start)
   //监听加载
   window.addEventListener('scroll',this.scrollLoad)
 }
@@ -92,6 +116,12 @@ componentWillUnmount(){
           this.state.comments.length!==0&&this.state.comments.map((item:any,index:number)=>{
             return <Comment item={item} film={true} last={index===this.state.comments.length-1} />
           })
+        }
+        {
+          this.state.comments.length>=75&&
+          <div style={{width:'60px',height:'25px',backgroundColor:'#83BF73',textAlign:'center',fontSize:'12px',color:'white',borderRadius:'2px',lineHeight:'25px',margin:'10px 0'}} onClick={this.skippage}>
+            <Icon type="right" style={{verticalAlign:'middle'}}/> <span style={{verticalAlign:'middle'}}> 下一页</span>
+          </div>
         }
         </div>
       </div>

@@ -91,7 +91,7 @@ const colNumber:number=list.length
           </div>
            }
          </div>
-          {list.length&& <Carousel changePage={changePage} isHotList={ishotList}>
+          {list.length>0&& <Carousel changePage={changePage} isHotList={ishotList}>
            {
              list.map((item:any,index:number)=>{
                return(
