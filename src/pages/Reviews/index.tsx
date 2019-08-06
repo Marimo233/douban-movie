@@ -119,7 +119,7 @@ componentWillUnmount(){
         }
         {
           this.state.comments.length>=75&&
-          <div style={{width:'60px',height:'25px',backgroundColor:'#83BF73',textAlign:'center',fontSize:'12px',color:'white',borderRadius:'2px',lineHeight:'25px',margin:'10px 0'}} onClick={this.skippage}>
+          <div className='nextPage'  onClick={this.skippage}>
             <Icon type="right" style={{verticalAlign:'middle'}}/> <span style={{verticalAlign:'middle'}}> 下一页</span>
           </div>
         }
