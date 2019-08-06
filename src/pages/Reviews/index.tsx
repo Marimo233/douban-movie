@@ -88,7 +88,7 @@ scrollLoad=()=>{
           if(this.state.comments.length>=75){
             return
           }else{
-            this.request(this.state.start+25)
+            this.request(this.state.start)
           this.setState((prevState,props)=>{return {start:prevState.start+25,scrollStart:window.scrollY}})
           } 
         }
