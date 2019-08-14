@@ -16,11 +16,8 @@ module.exports = function (app) {
       '^/test': '/v2',
     },
   }));
-  app.use(proxy('/api', {
+  app.use(proxy('/j', {
     target: 'https://movie.douban.com',
     changeOrigin: true,
-    pathRewrite: {
-      '^/api': '/j',
-    },
   }))
 };
