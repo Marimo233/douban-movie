@@ -45,7 +45,7 @@ export default function About(props:Props) {
               </ul>
           </h1>
           <ul>
-            <li className='videoLi'><video src={data.trailer_urls} poster={data.trailers[0].medium}></video><span>预告片</span></li>
+            {/* <li className='videoLi'><video src={data.trailer_urls} poster={data.trailers[0].medium}></video><span>预告片</span></li> */}
             {
               data.trailers.map((item:any)=>{
                   return <li><img src={item.medium} alt=""/></li>

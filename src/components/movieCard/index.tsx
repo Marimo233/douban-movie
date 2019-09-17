@@ -116,7 +116,7 @@ const toSubject=(id:string|number)=>{
     //热门
     :<div className='list-wrap' style={{marginRight:(index+1)%5!==0?'25px':'',marginBottom:Math.floor(index/5)===0?'10px':''}} ref={card} onClick={()=>{toSubject(Info.id)}}>
       <div className="listPost" onMouseEnter={()=>{requestCard(Info.id)}} onMouseLeave={()=>{return(setStatus(false),setloading(false))}}>
-        <img src={Info.cover} alt={Info.title}/>
+        <img src={'https://images.weserv.nl/?url='+Info.cover.replace('https://','')} alt={Info.title}/>
       </div>
       <p className="listTitle">
         {Info.is_new?<i/>:''}
